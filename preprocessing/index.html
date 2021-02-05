@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Preprocessing - Abiotrans Plus</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Preprocessing";
+    var mkdocs_page_input_path = "preprocessing.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Abiotrans Plus</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">AbioTransPlus</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Preprocessing</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#rna-seq-gene-expression-matrix-format">RNA-Seq gene expression matrix format</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#import-data">Import data</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pre-processing">Pre-processing</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#microarray-preprocessing-new-feature">Microarray Preprocessing (new feature)</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../transcriptome/">Transcriptome Analysis</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../analysis/">Gene/Protein Set Analysis</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Abiotrans Plus</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Preprocessing</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="import-data-and-preprocessing">Import Data and Preprocessing</h1>
+<p>ABioTransPlus supports two types of common data formats for gene expression analysis: RNA-Seq count matrix and Microarray CEL files.</p>
+<h2 id="rna-seq-gene-expression-matrix-format">RNA-Seq gene expression matrix format</h2>
+<h3 id="import-data">Import data</h3>
+<p>Choose an RNA-Seq data file in comma-separated value (.csv) format.</p>
+<ol>
+<li>
+<p>If you input raw data (read counts), please make sure that the first column contains gene names, and the read counts of each genotype (conditions: wildtype, mutants, replicates, etc.) are in the following columns. Each genotype column should have a column name.</p>
+</li>
+<li>
+<p>Along with raw read counts, you can provide gene length (base pair) information in two-column .csv file, with the first column specifying gene names, which must match the gene names in raw data file, and the second column specifying gene length in base pair. Gene length file is required for normalization methods for sequencing depth and gene length: RPKM, FPKM, TPM</p>
+</li>
+<li>
+<p>Alternatively, if you input a normalized data file, it should have gene names in rows and genotypes in columns, following the usual format of files deposited in the GEO database.</p>
+</li>
+</ol>
+<p><img alt="image1" src="../img/image1.png" />
+<img alt="Eg_gene_length" src="../img/Eg_gene_length.png" /></p>
+<p>List of negative control genes (spike-in or stably expressed genes accross all samples), if available, should be contained in one-column .csv file. Negative control genes are required for Remove Unwated Variation (RUV) normalziation.</p>
+<p><img alt="Eg_negative_control_genes" src="../img/Eg_negative_control_genes.png" /></p>
+<p>Finally, a metadata table matching column names of data file to experimental conditions should be given in two-column .csv format. Metadata table is required for differential expression analysis</p>
+<p><img alt="Eg_metadata" src="../img/Eg_metadata.png" /></p>
+<h3 id="pre-processing">Pre-processing</h3>
+<p>Preprocessing involves two steps: removing lowly expressed genes and normalizing the remaining gene expression.</p>
+<ol>
+<li>For removing lowly expressed genes, the user need to specify threshold expression values (which must be in same unit to the input data file - either raw read counts or normalized expression), and the minimum number of data columns that must exceed the threshold value.</li>
+<li>Normalization methods are available upon the availability of supporting data files: normalization for sequencing depth, including TPM and RPKM, requires gene length and normalization for sample variation, including RUV, requires negative control genes. User can download the filtered, normalized data in the <code>Data</code> tab.
+Relative Log Expression (RLE) plots of raw and processed data are displayed to visualize the effects of normalization. Distribution of gene expression in each data column is visualized by violin plot.</li>
+</ol>
+<p>![Figure 2: Preprocessing panel with RLE plots of raw data (upper figure) and filtered, RUV-normalized data (lower figure). Gene expression with minimum five counts in at least two columns are retained.]</p>
+<p><img alt="1b_preprocess(2)" src="../img/1b_preprocess%282%29.png" /></p>
+<h2 id="microarray-preprocessing-new-feature">Microarray Preprocessing (new feature)</h2>
+<p>Microarrays can be used in many types of experiments including genotyping, epigenetics, translation profiling and gene expression profiling</p>
+<p>Raw Count data &amp; Metadata can be extracted from the Microarray which can further be used to perform all the different analysis.</p>
+<p>The user needs to zip all the <code>CEL</code> files along with the <code>SDRF</code>(Sample and Data Relationship Format) file ( e.g. E-MTAB-2967.sdrf.txt) &amp; upload it.</p>
+<p>Once the processing is complete, the user can download the output in <code>csv</code> format.</p>
+<p><img alt="Microarray" src="../img/Microarray.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../transcriptome/" class="btn btn-neutral float-right" title="Transcriptome Analysis">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="AbioTransPlus"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../transcriptome/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

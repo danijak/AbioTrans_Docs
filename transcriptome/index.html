@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Transcriptome Analysis - Abiotrans Plus</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Transcriptome Analysis";
+    var mkdocs_page_input_path = "transcriptome.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Abiotrans Plus</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">AbioTransPlus</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../preprocessing/">Preprocessing</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Transcriptome Analysis</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#scatter-plot">Scatter plot</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#distribution-fitting">Distribution fitting</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pearson-and-spearman-correlations">Pearson and Spearman correlations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pca-and-k-means-clustering">PCA and K-means clustering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#differential-expression-analysis">Differential Expression Analysis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#heatmap-of-gene-expression-and-hierarchical-clustering">Heatmap of gene expression and Hierarchical clustering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#transcriptome-wide-average-noise">Transcriptome-wide average noise</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#entropy">Entropy</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#t-distributed-stochastic-neighbor-embedding-t-sne-new-feature">t-distributed stochastic neighbor embedding (t-SNE) (new feature)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#clustering-with-random-forest-new-feature">Clustering with random forest (new feature)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#self-organizing-map-som-new-feature">Self-Organizing Map (SOM) (new feature)</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../analysis/">Gene/Protein Set Analysis</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Abiotrans Plus</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Transcriptome Analysis</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="transcriptome-analysis">Transcriptome Analysis</h1>
+<h2 id="scatter-plot">Scatter plot</h2>
+<p>Scatter plot compares any 2 samples (or 2 replicates) by displaying the respective expression of all genes in 2D space. It is recommended to preform normalization for sequencing depth (TPM, RPKM, FPKM) for this step (and so does distribution fitting, correlation, hierarchical clustering, noise and entropy).</p>
+<p>As gene expression data is naturally skewed towards very high expression level region, we recommend applying log-transformation to capture the whole data range. User can choose between log base 2, natural log, or log base 10. An option to add linear regression line is also available. Gene expression data is densely distributed in the lowly expressed region, making the dots usually indistinguishable in regular scatter plot.</p>
+<p>ABioTransPlus overlay a 2D kernel density estimation on the scatter plot to visualize the density of expression level. The user can choose to download each single scatter plot, or to download all pairs of samples scatter plot in one PDF file, which may take some time to run.</p>
+<p><img alt="2a_scatter" src="../img/2a_scatter.png" /></p>
+<h2 id="distribution-fitting">Distribution fitting</h2>
+<p>Choose the column you want to fit and compare with any combinations of the six statistical distributions. You can adjust the slider or input the range for x-axis to zoom in to see the fitted curve.</p>
+<p>Distribution fitting compares the gene expression to a number of statistical continuous distributions, which can be used to validate the data. To visualize the comparison, ABioTransPlus displays the Cumulative Distribution Function of the preprocessed gene expression data with the user-selected theoretical distributions. Once it is confirmed that the gene set follow a distribution, it would be safe conclude the validity of the gene expression data. <code>AIC table</code> is also provided in <code>AIC table</code> tab to show the best fitted distribution in each sample</p>
+<p><img alt="2b_distfit" src="../img/2b_distfit.png" /></p>
+<h2 id="pearson-and-spearman-correlations">Pearson and Spearman correlations</h2>
+<p>The Pearson correlation evaluates the linear relationship between two continuous variables. A relationship is linear when a change in one variable is associated with a proportional change in the other variable.</p>
+<p>The Spearman correlation evaluates the monotonic relationship between two continuous or ordinal variables. In a monotonic relationship, the variables tend to change together, but not necessarily at a constant rate. The Spearman correlation coefficient is based on the ranked values for each variable rather than the raw data.</p>
+<p>User shall choose a correlation method and view it in either correlation heatmap, correlation plot in circle or correlation matrix.</p>
+<p><img alt="2c_corr" src="../img/2c_corr.png" /></p>
+<h2 id="pca-and-k-means-clustering">PCA and K-means clustering</h2>
+<p>Principal Components Analysis (PCA) is an multivariate statistical technique for simplifying high-dimensional data sets <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2669932/#R1">(Basilevsky 1994)</a>. Given m observations on n variables, the goal of PCA is to reduce the dimensionality of the data matrix by finding r new variables, where r is less than n. Termed principal components, these r new variables together account for as much of the variance in the original n variables as possible while remaining mutually uncorrelated and orthogonal. Each principal component is a linear combination of the original variables, and so it is often possible to ascribe meaning to what the components represent. A PCA analysis of transcriptomic data consider the genes as variables, creating a set of “principal gene components” that indicate the features of genes that best explain the experimental responses they produce.</p>
+<p><img alt="2d_pca(2)" src="../img/2d_pca%282%29.png" /></p>
+<h2 id="differential-expression-analysis">Differential Expression Analysis</h2>
+<p>DE analysis identifies the genes that are statistically different in expression levels between the 2 selected conditions. Two important threshold are:</p>
+<p>The lower bound of expression fold change between the 2 selected conditions</p>
+<p>The upper bound of hypothesis test p-value</p>
+<p>AbioTransPlus implements 3 popular methods to identify DE genes:</p>
+<ol>
+<li>
+<p><a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8">DESeq2</a></p>
+</li>
+<li>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2796818/">EdgeR</a></p>
+</li>
+<li>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4666377/">NOISeq</a></p>
+</li>
+</ol>
+<p>For data with single replicate in all experiment condition, NOISeq method can simulate technical replicates to carry out DE test. Metadata file is required for DE Analysis. Please make sure metadata contains all column names from input data file and match them with experimental condition</p>
+<p>For edgeR and DESeq2, raw read counts data file must be provided. For NOISeq, gene expression should be normalized for sequencing depths (by select normalization method in Preprocessing tab if raw counts file is inputted, or by directly providing normalized gene expression)</p>
+<p>To carry out the analysis, first the user needs to specify DE methods, two conditions to compare (condition 2 is compared against condition 1), fold change cut-off value and False Discovery Rate (FDR or adjusted p-value) threshold, then hit the “Submit” button. By convention, DE genes are filtered at FDR = 0.05 and 2-fold change.</p>
+<p>When the computation finishes, table of DE genes, volcano plot of DE result and dispersion plot of input data are displayed in their respective tabs. Please note that volcano plot and dispersion plot are only available for edgeR and DESeq2 methods.</p>
+<p><img alt="2e_volcano" src="../img/2e_volcano.png" /></p>
+<h2 id="heatmap-of-gene-expression-and-hierarchical-clustering">Heatmap of gene expression and Hierarchical clustering</h2>
+<p>Hierarchical clustering is used to find the groups of co-expressed genes. The clustering is performed on normalized expressions of differentially expressed genes using Ward clustering method.</p>
+<p>Heat map of gene expression and hierarchical clustering can be carried out on DE genes resulted from DE analysis tab by selecting <code>DE result</code>. Otherwise, you can specify the minimum fold change and minimum number of samples (columns in input data file) satisfying the fold change. Finally, you need to specify the number of clusters on rows (genes), then hit <code>Submit</code>.</p>
+<p>The gene names in each cluster are displayed in the <code>Gene clusters</code> panel, corresponding to the heatmap you just generated.</p>
+<p><img alt="2f_headmap_cluster(2)" src="../img/2f_headmap_cluster%282%29.png" /></p>
+<h2 id="transcriptome-wide-average-noise">Transcriptome-wide average noise</h2>
+<p>Transcriptome-wide average noise is used to quantify between gene expressions scatter of all replicates in one experimental condition. Formula is adapted from <a href="https://www.nature.com/articles/srep07137">Kumar et. al 's</a> paper</p>
+<ol>
+<li>User to select a desired noise plot according to your data. By default the name of the first replicate in each genotype is used as the name of the genotype. You can specify the names of the genotypes, only make sure that all names are different (due to the mapping mechanism of Plotly). Please be reminded that the consecutive columns will be regarded as of the same genotype.</li>
+<li>Noise here refers to the average transcriptome noise — the squared coefficient of variation — defined as the variance (σ2) of expression divided by the square mean expression (μ2).</li>
+<li>If <code>replicates</code> is selected, the noise within one genotype will be computed.</li>
+<li>If <code>genotypes (average of replicates)</code> is selected, the gene expression data within one genotype will first be taken average of, and the average value will be used as the expression value of that certain genotype. Then noise will be computed between the anchor genotype and all the other genotypes.</li>
+<li>If <code>genotypes (no replicate)</code> is selected, each sample column is treated as a different genotype. Noise will directly be computed between the anchor genotype and the rest of the genotypes.</li>
+</ol>
+<h2 id="entropy">Entropy</h2>
+<p>Shannon entropy (<a href="https://onlinelibrary.wiley.com/doi/10.1002/j.1538-7305.1948.tb01338.x">Shannon, 1948</a>) measures the disorder of a high-dimensional system, where higher values indicate increasing disorder. ABioTransPlus adapts the Shannon entropy formula to quantify the variability of one sample of gene expression.</p>
+<ol>
+<li>First specify whether your data is a time series data.</li>
+<li>If the data is not in time series, entropy values of all samples will directly be displayed.</li>
+<li>Otherwise, if it is a time series data, specify the number of time points. For example, if the number of time points is 6, then sample 1 to 6 will be regarded as genotype A time 1 - time 6, sample 7 to 12 will be genotype B time 1- time 6, and so on and so forth. For a line chart, the entropy of each genotype will be shown in one line.</li>
+</ol>
+<p><img alt="2g_entropy" src="../img/2g_entropy.png" /></p>
+<h2 id="t-distributed-stochastic-neighbor-embedding-t-sne-new-feature">t-distributed stochastic neighbor embedding (t-SNE) (new feature)</h2>
+<p>t-SNE is a dimensionality-reduction approach that reduces the complexity of highly complex data such as the transcriptomic data. It visualizes the sample interrelations in a 2- or 3-dimensional visualization. This allows the identification of the close similarities between samples through the relative location of mapped points. Since t-SNE is nonlinear and able to control the trade-off between local and global relationships among points, its visualization of the clusters is usually more compelling when compared with the other methods [<a href="https://pubmed.ncbi.nlm.nih.gov/31784353/">Cieslak 2020</a>].</p>
+<p>ABioTrans Plus introduces an intuitive interface that allows performing t-SNE analysis on the processed untransformed transcriptomic data through entering three inputs perplexity value, the number of principal components (PC) and the number of clusters. The user can also choose to log transform the data before submission.</p>
+<h2 id="clustering-with-random-forest-new-feature">Clustering with random forest (new feature)</h2>
+<p>Random forest clustering is an unsupervised learning approach, where each sample is clustered into different classes, based on their similarity (usually based on Euclidean distance).</p>
+<p>ABioTrans Plus uses the random forest algorithm to generate a proximity matrix, a rough estimate of the distance between samples based on the proportion of times the samples end up in the same leaf node of the decision tree. The proximity matrix is converted to a dist matrix which is then inputted to the hierarchical clustering algorithm [<a href="https://pubmed.ncbi.nlm.nih.gov/22546560/">Chen 2012</a>]</p>
+<p>The <code>diff_genes.csv</code> file will be generated after each run, containing names of differential genes.</p>
+<p><img alt="Random forest" src="../img/Random%20forest.png" /></p>
+<h2 id="self-organizing-map-som-new-feature">Self-Organizing Map (SOM) (new feature)</h2>
+<p>SOM is a dimensionality reduction technique that produces a two-dimensional, discretized representation of the high-dimensional gene expression matrix. It uses a neighbourhood function to preserve the topological properties of the input gene expression matrix. Each data point (e.g. 1 sample) in the input gene expression matrix recognizes itself by competing for representation. SOM mapping steps start from initializing the weight vectors. From there, a sample vector is selected randomly and the map of weight vectors is searched to find which weight best represents that sample. Each weight vector has neighbouring weights that are close to it. The weight that is chosen is rewarded by being able to become more like that randomly selected sample vector. The neighbours of that weight are also rewarded by being able to become more like the chosen sample vector. This allows the map to grow and form different shapes. Most generally, they form square/rectangular/hexagonal/L shapes in 2D feature space [<a href="https://link.springer.com/chapter/10.1007%2F978-3-540-78293-3_17">Yin 2020</a>].</p>
+<p>ABioTrans Plus provides 5 types of SOM plots:</p>
+<p><code>Property</code>: Uses values of codebook vectors (weight of gene vectors) and output as coloured nodes</p>
+<p><code>Count</code>: Shows how many genes are mapped to each node</p>
+<p><code>Codes</code>: Displays codebook vectors</p>
+<p><code>Distance</code>: Shows how close genes are from each other when they are mapped</p>
+<p><code>Cluster</code>: Uses hierarchical clustering to cluster the SOM</p>
+<p>There are 4 parameters to control the SOM plots. <code>Samples used</code> determines the sample chosen for the plots, either all samples or individual ones. <code>No. of horizontal grids</code> and <code>No. of vertical grids</code> changes the number of nodes used in the SOM. <code>No. of clusters</code> classifies the SOM nodes into the specified cluster size (for cluster plot).</p>
+<p><img alt="SOM" src="../img/SOM.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../analysis/" class="btn btn-neutral float-right" title="Gene/Protein Set Analysis">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../preprocessing/" class="btn btn-neutral" title="Preprocessing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../preprocessing/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../analysis/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

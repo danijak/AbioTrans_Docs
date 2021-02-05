@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Gene/Protein Set Analysis - Abiotrans Plus</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Gene/Protein Set Analysis";
+    var mkdocs_page_input_path = "analysis.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Abiotrans Plus</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">AbioTransPlus</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../preprocessing/">Preprocessing</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../transcriptome/">Transcriptome Analysis</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Gene/Protein Set Analysis</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#pathways-enrichment-analysis">Pathways Enrichment Analysis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#protein-protein-interaction">Protein-Protein Interaction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#complex-enrichment">Complex Enrichment</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#protein-function">Protein Function</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#protein-subcellular-localization">Protein Subcellular Localization</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#protein-domains">Protein Domains</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tissue-expression">Tissue Expression</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#protein-evolutionary-analysis">Protein Evolutionary Analysis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#protein-pathological-analysis">Protein Pathological Analysis</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Abiotrans Plus</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Gene/Protein Set Analysis</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="geneprotein-set-analysis">Gene/Protein Set Analysis</h1>
+<p>Differentially expressed gene (DGE) analysis usually outputs a list of genes that are statistically determined as differentially expressed. Then, the list of DEGs is analyzed, interpreting and annotated to learn more about the functions, pathways and cellular processes that these genes are involved in. Most of the gene differential expression analysis tools do not include bioinformatics features for gene set analysis or include few basic analyses such as GO and pathways enrichment.</p>
+<p>In ABioTrans Plus, we designed the GO feature to be dynamic by reading the GO terms associated with the genes/proteins directly from UniProt Knowledgebase [<a href="https://pubmed.ncbi.nlm.nih.gov/30395287/">UniProt Consortium 2019</a>] then visualize each of the three GO domains (cellular component, molecular function and biological process) in an independent tab in a bar chart and on a downloadable tabular format (Figure YY). Furthermore, we introduced 11 new bioinformatics analyses that can be performed on a given gene/protein dataset.</p>
+<h2 id="pathways-enrichment-analysis">Pathways Enrichment Analysis</h2>
+<p>For a given gene or protein set, ABioTrans Plus uses g:Profiler [<a href="https://academic.oup.com/nar/article/47/W1/W191/5486750">Raudvere 2019</a>] to perform a pathway enrichment analysis and displays the results as a network where the nodes are the pathways and the edges are the overlap between the pathways (Figure X). We use Cytoscape.JS for the network visualization [<a href="https://academic.oup.com/bioinformatics/article/32/2/309/1744007">Franz 2016</a>] and, therefore, the network properties such as the colour and layout can be changed from the left panel.</p>
+<p>The users can choose from nine different network layouts and five different network colour schemes. The overlap between the pathways can be also changed from the provided controllers so that the user can choose an overlap cutoff or overlap range. The enrichment results can also be downloaded as a CSV file.</p>
+<h2 id="protein-protein-interaction">Protein-Protein Interaction</h2>
+<p>Investigating PPIs is one of the essential steps in systems biology studies. PPI databases are growing in size with improved accuracy of PPI curations. Furthermore, several recent large-scale projects provide experimentally-confirmed interaction such as the reference map of the human binary protein interactome (HuRI) project [<a href="https://www.nature.com/articles/s41586-020-2188-x">Luck 2020</a>]. The PPI feature in ABioTrans Plus provides the users with an interface where they can upload a set of proteins (UniProt accessions) and get all the interactions associated with them. The interactions are visualized as a network where the nodes are the proteins and the edges are the interactions and the node size corresponds to the number of interactors of the protein. We use Cytoscape.JS for PPI visualization [<a href="https://academic.oup.com/bioinformatics/article/32/2/309/1744007">Franz 2016</a>]. We provide users with five network styles and nine network layouts to customize their results. The results are also displayed as an interactions table and can be downloaded as a network or an interaction table.</p>
+<h2 id="complex-enrichment">Complex Enrichment</h2>
+<p>The identification of the subunits of the protein complexes is important to understand the functions and the formation of these macromolecular machines. We provide the user with a complex enrichment feature that allows the identification of proteins in the provided dataset that are part of a known protein complex. This feature uses CORUM databases, which contain curated complex information for mammalian proteins [<a href="https://pubmed.ncbi.nlm.nih.gov/30357367/">Giurgiu 2019</a>]. This feature provides the user with complex-forming proteins and the complex information in the submitted dataset.</p>
+<h2 id="protein-function">Protein Function</h2>
+<p>UniProt Knowledgebase provides a detailed function for thousands of proteins. The protein function feature retrieves the protein function information from UniProt of a given protein set (UniProt accessions). The retrieved protein functions are displayed in a downloadable tabular format.</p>
+<h2 id="protein-subcellular-localization">Protein Subcellular Localization</h2>
+<p>The protein localization critically affects the protein function. The change of the protein localization is a cellular approach to regulate biological processes. UniProt Knowledgebase provides curated subcellular localization information for the proteins. The protein subcellular localization feature provides the user with an interface to get the subcellular localization information for a given list of proteins (UniProt accessions) and display the results in a downloadable tabular format.</p>
+<h2 id="protein-domains">Protein Domains</h2>
+<p>The protein domains are the functional subunits of the proteins that contribute to their overall function. Each domain is responsible for a certain function or interaction. ABioTrans Plus provides the users with a protein domain feature that connects to UniProt Knowledgebase and retrieves the domain information associated with each protein in a given list of UniProt accession.</p>
+<h2 id="tissue-expression">Tissue Expression</h2>
+<p>The distinct expression profile of genes and proteins per tissue is what gives the different tissues the suitability for their functions. The tissue expression feature in ABioTrans Plus provides the user with the tissue expression for each protein in a given protein list (UniProt accessions) through retrieving this information from UniProt Knowledgebase. The result is displayed in a downloadable tabular format. 8) Gene Co-expression: The co-expression analysis is a common analysis that assesses the expression level of different genes to identify simultaneously expressed genes. The resultant co-expression networks are used to identify functionally related genes or genes being controlled by the same transcriptional mechanism [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5359264/">Vella 2017</a>]. ABioTrans Plus provides the users with an interface where they can submit a co-expression query to GeneMANIA [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6030815/">Franz 2018</a>] then shows the results at GeneMANIA’s website in a new tab. Currently, we support queries for nine model organisms including human, yeast, E. coli, C. elegans, Arabidopsis, Drosophila, zebrafish, mouse and rat.9) Protein Physicochemical Properties: For a given set of proteins (UniProt accessions), this feature provides the user with the complete sequences of them in a single FASTA file and allows the user to investigate their physicochemical properties. The physicochemical analysis includes sequence charge, GRAVY index [<a href="https://pubmed.ncbi.nlm.nih.gov/7108955/">Kyte 1982</a>] and hydrophobicity (Figure YA).</p>
+<h2 id="protein-evolutionary-analysis">Protein Evolutionary Analysis</h2>
+<p>For a given set of proteins (UniProt accessions), this feature provides the user with a phylogenetic and evolutionary analysis that include multiple sequence alignment (MSA) of the protein sequences, clustering based on the amino acid sequences, chromosomal location or gene tree (Figure YB).</p>
+<h2 id="protein-pathological-analysis">Protein Pathological Analysis</h2>
+<p>Several diseases are associated with the malfunction of certain genes or proteins. The disease-protein association is collected in different online resources such as OMIM databases [<a href="https://pubmed.ncbi.nlm.nih.gov/30445645/">Amberger 2019</a>], DisProt [<a href="https://academic.oup.com/nar/article/48/D1/D269/5622715">Hatos 2020</a>] and DisGeNET [<a href="https://academic.oup.com/nar/article/48/D1/D845/5611674">Pinero 2019</a>]. ABioTrans Plus provides the users with an interface that retrieves the disease-protein association from online databases for a given list of proteins (UniProt accessions). The disease-protein association is visualized as bubble chats that shows the distribution of the proteins among the disease (each bubble is protein and the bubble size is the number of associated disease) or the distribution of proteins among the diseases (each bubble is a disease and the bubble size is the number of associated proteins) (Figure YC).</p>
+<p>The features that communicate with UniProt Knowledgebase use UniProtR, an R package for data retrieval and visualization from UniProt [<a href="https://pubmed.ncbi.nlm.nih.gov/31843688/">Soudy 2020</a>]. Since all the bioinformatics features only accept gene names (gene symbol) or UniProt accessions, we provide the users on each page with links to two ID converters UniProt ID mapping [<a href="https://pubmed.ncbi.nlm.nih.gov/30395287/">UniProt Consortium 2019</a>] and g:Convert [<a href="https://academic.oup.com/nar/article/47/W1/W191/5486750">Raudvere 2019</a>] to convert their identifiers to gene names or UniProt accessions.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../transcriptome/" class="btn btn-neutral" title="Transcriptome Analysis"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../transcriptome/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
